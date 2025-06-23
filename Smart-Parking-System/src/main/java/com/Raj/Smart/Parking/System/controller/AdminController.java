@@ -2,6 +2,7 @@ package com.Raj.Smart.Parking.System.controller;
 
 
 import com.Raj.Smart.Parking.System.dto.ParkingSpotRequest;
+import com.Raj.Smart.Parking.System.dto.PricingPolicyRequest;
 import com.Raj.Smart.Parking.System.entity.ParkingSpot;
 import com.Raj.Smart.Parking.System.entity.PricingPolicy;
 import com.Raj.Smart.Parking.System.repository.ParkingSpotRepository;
@@ -41,7 +42,11 @@ public class AdminController {
 
     // --- Add or update pricing policy ---
     @PostMapping("/pricing")
-    public PricingPolicy addOrUpdatePricing(@RequestBody PricingPolicy policy) {
+    public PricingPolicy addOrUpdatePricing(@RequestBody PricingPolicyRequest request) {
+        PricingPolicy policy = new PricingPolicy();
+        policy.setVehicleType(request.getVehicleType());
+        policy.setHourlyRate(request.getHourlyRate());
+
         return _pricingPolicyRepository.save(policy);
     }
 
